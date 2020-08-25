@@ -1,0 +1,24 @@
+{
+  "name": "glovo-presentations",
+  "version": "1.0.0",
+  "description": "https://asciidoctor.org/docs/asciidoctor-revealjs/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@asciidoctor/reveal.js": "^4.0.1",
+    "asciidoctor": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glovo/glovo-presentation-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Glovo/glovo-presentation-template/issues"
+  },
+  "homepage": "https://github.com/Glovo/glovo-presentation-template#readme"
+}

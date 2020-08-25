@@ -1,0 +1,221 @@
+// :revealjs_customtheme: css/glovo-theme.css
+// beige, black, league, night, serif, simple, sky, solarized, white
+:revealjs_theme: white
+:customcss: css/glovo.css
+:imagesdir: images
+:icons: font
+:revealjs_transition: slide
+:revealjs_pdfseparatefragments: false
+
+// this instruct to process docinfo which includes the header position
+:docinfo: shared
+
+// optionally width: "100%"
+:revealjs_width: 1408
+:revealjs_height: 792
+
+// 15 minutes
+:revealjs_totalTime: 900
+:source-highlighter: rouge
+
+[.main.background]
+== Documenting code
+image::resources/main-background.png[background]
+
+[.footer.author] 
+~Maciej~ ~Pietrzak~
+~and~
+~CF~ ~team~
+
+== Resources
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+. Refactoring: Improving the Design of Existing Code by Martin Fowler, Kent Beck
+. Clean code by Robert C. Martin
+. Some other resources :)
+
+[.glovo-title]
+== Wednesday motivation
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[quote, Sławomir Sobótka]
+Don't code, write prose
+
+[.glovo-title]
+== Wednesday motivation
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+--
+image::resources/damiano.png[Quote,600, 600]
+--
+
+[.glovo-title]
+== Wednesday motivation
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[quote, Kernighan and Plaugher, The Elements of Programming Style]
+Don’t comment bad code—rewrite it.
+
+[.glovo-title]
+== Conditions as comments
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+Often, sections of code work only if certain conditions are true.
+This may be as simple as a square root calculation only working on a positive input value.
+
+Such assumptions are often not stated but can only be deduced by looking through an algorithm.
+
+Sometimes, the assumptions are stated with a comment. A better technique is to make the assumption explicit by writing an assertion.
+
+_Refactoring Improving the Design of Existing Code:Martin Fowler, Kent Beck_
+
+[.glovo-title]
+== Conditions as comments
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[source,java]
+public static ContactTreeNodeOnDemand createValidNode(
+    @NotNull String title, @NotNull OnDemandVM onDemand
+) {
+    if (onDemand == null) {
+        throw new IllegalArgumentException("onDemand cannot be null");
+    }
+    if (StringUtils.isEmpty(title)) {
+        throw new IllegalArgumentException("title cannot be null");
+    }
+    return new ContactTreeNodeOnDemand(title, onDemand);
+}
+
+instead of
+
+[source,java]
+public static ContactTreeNodeOnDemand createValidNode(
+    @NotNull String title, @NotNull OnDemandVM onDemand
+) {
+    // title and onDemand should not be null
+    return new ContactTreeNodeOnDemand(title, onDemand);
+}
+
+[.glovo-title]
+== A comment that should clarify behaviour
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+A heuristic we follow is that whenever we feel the need to comment something, we write a function instead.
+
+Such a function contains the code that we wanted to comment but is named after the intention of the code rather than the way it works.
+We may do this on a group of lines or even on a single line of code. We do this even if the method call is longer than the code it replaces—provided the method name explains the purpose of the code.
+The key here is not function length but the semantic distance between what the method does and how it does it.
+
+_Refactoring Improving the Design of Existing Code:Martin Fowler, Kent Beck_
+
+[.glovo-title]
+== A comment that should clarify behaviour
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[source,java]
+// Check to see if the employee is eligible for full benefits
+if ((employee.flags & HOURLY_FLAG) &&
+   (employee.age > 65))
+
+Or this?
+
+[source,java]
+   if (employee.isEligibleForFullBenefits())
+
+[.glovo-title]
+== General rule before writing a comment
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+If you need a comment to explain what a block of code does, try Extract Function.
+
+If the method is already extracted but you still need a comment to explain what it does, use Change Function Declaration to rename it.
+
+If you need to state some rules about the required state of the system, use Introduce Assertion.
+
+_Refactoring Improving the Design of Existing Code:Martin Fowler, Kent Beck_
+
+[.glovo-title]
+== Clean code view on comments
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[quote, Robert C. Martin, Clean Code]
+____
+Nothing can be quite so helpful as a well-placed comment.
+
+Nothing can clutter up a module more than frivolous dogmatic comments.
+
+Nothing can be quite so damaging as an old crufty comment that propagates lies and misinformation.
+____
+
+[.glovo-title]
+== Clean code view on comments
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+It is possible to make the point that programmers should be disciplined enough to keep the comments in a high state of repair, relevance, and accuracy.
+
+I agree, they should. But I would rather that energy go toward making the code so clear and expressive that it does not need the comments in the first place.
+
+_Robert C. Martin, Clean Code_
+
+[.glovo-title]
+== Some valid comments
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[source, java]
+ // format matched kk:mm:ss EEE, MMM dd, yyyy
+Pattern timeMatcher = Pattern.compile(“\\d*:\\d*:\\d* \\w*, \\w* \\d*, \\d*”);
+
+In this case the comment lets us know that the regular expression is intended to match a time and date that were formatted with the SimpleDateFormat.format function using the specified format string.
+Still, it might have been better, and clearer, if this code had been moved to a special class that converted the formats of dates and times.
+Then the comment would likely have been superfluous.
+
+_Robert C. Martin, Clean Code_
+
+[.glovo-title]
+== Good comments in public API
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[source, java]
+----
+/**
+ * <p>Checks if a CharSequence is empty ("") or null.</p>
+ * StringUtils.isEmpty(null)      = true
+ * StringUtils.isEmpty("")        = true
+ * StringUtils.isEmpty(" ")       = false
+ * StringUtils.isEmpty("bob")     = false
+ * StringUtils.isEmpty("  bob  ") = false
+ *
+ * @param cs  the CharSequence to check, may be null
+ * @return {@code true} if the CharSequence is empty or null
+ */
+public static boolean isEmpty(final CharSequence cs) {
+    return cs == null || cs.length() == 0;
+}
+----
+Apache Commons Lang3
+
+[.glovo-title]
+== When you know you'll have to go back and fix something
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+[source, java]
+ // TODO: will be remove PFN-734
+
+. Create task with description why something has to be done
+. Add task number to the comment
+. Commit this comment with other changes to preserve context
+. Briefly explain what or why has to be done in a comment.
+
+[.glovo-title]
+== How to change comments defining abbreviation to enum
+image::resources/top-left-image.png[background, size=25%, position=0% 0%]
+
+Sometimes (often when you have to integrate with 3rd party system) we have to use some kind of static/hardcoded values that means noting to us or they are abbreviation.
+In such cases it is useful to create enums with meaningful names and as a field use abbreviation.
+
+[source, java]
+enum OperationType {
+  POS("NCP"),
+  CLOSE("CLA"),
+  MERGE("MLA"),
+  UNKNOWN("");
+}

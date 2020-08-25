@@ -1,0 +1,118 @@
+/* Glovo colors and fonts
+Yellow: #ffd13fff
+Black: #434343ff
+Gray: #d9d9d9ff
+Green: #00a082ff
+
+Font Montserrat 14 (titles) 12 (text) 8 (notes)
+ */
+
+@import 'https://fonts.googleapis.com/css?family=Montserrat';
+
+/*.reveal .slides { margin: 0; }*/
+.reveal{
+    color: #434343ff !important;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+    font-family: "Montserrat", Impact, sans-serif;
+    color: #434343ff;
+    text-transform: none;
+}
+
+#title-holder {
+    position: absolute;
+    left:0; 
+    top:-10px;
+    font-family: "Montserrat", Impact, sans-serif;
+    color: #434343ff;
+    /* Glovo icon */
+    background-image: url(../images/icons/image_664-black.png);
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position-x: -18px;
+    padding-left: 52px;
+}
+
+#title-holder h1,
+#title-holder h2,
+#title-holder h3,
+#title-holder h4,
+#title-holder h5,
+#title-holder h6 {
+    margin: 0;
+    text-align: left;
+    line-height: 1;
+    text-transform: none;
+}
+
+section.glovo-title h1,
+section.glovo-title h2,
+section.glovo-title h3,
+section.glovo-title h4,
+section.glovo-title h5,
+section.glovo-title h6 {
+    display: none;
+}
+
+section.main.background {
+    background-color: #ffd13fff;
+}
+
+section .author {
+    font-weight: bold;
+    color: #00a082ff;
+}
+
+.reveal .admonitionblock {
+    font-size: 0.5em;
+}
+
+.reveal .admonitionblock td.icon {
+    vertical-align: center;
+}
+.reveal .admonitionblock .fa-fire:before,
+.reveal .admonitionblock .fa-info-circle:before {
+    content: none;
+}
+.reveal .admonitionblock .fa {
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    width: 1.5em;
+    height: 1.5em;
+}
+.reveal .admonitionblock .fa-fire {
+    background-image: url(images/icons/image_111.png);
+}
+.reveal .admonitionblock .fa-info-circle {
+    background-image: url(images/icons/image_149.png);
+}
+.reveal .quoteblock {
+    text-align: left;
+}
+
+.reveal section img { 
+    background:none; 
+    border:none; 
+    box-shadow:none; 
+}
+
+.reveal section .image {
+    vertical-align: top;
+}
+
+.small {
+    font-size: 0.75em;
+}
+
+.reveal section.main h1,
+.reveal section.main h2, 
+.reveal section.main h3 {
+    color: white;
+    text-shadow: 1px 1px 2px #434343ff;
+}

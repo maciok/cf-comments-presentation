@@ -1,0 +1,19 @@
+<span id="title-holder"></span>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+    var header = $('#title-holder');
+    $(document).ready(function() {
+        Reveal.addEventListener('slidechanged', event => {
+            // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+            var currentSlide = $(event.currentSlide);
+            if (currentSlide.hasClass("glovo-title")) {
+                var title = currentSlide.find(":header");
+                header.html(title.get(0).outerHTML);
+                header.show();
+            } else {
+                header.hide();
+            }
+        });
+    });
+</script>
